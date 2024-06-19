@@ -7,18 +7,42 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { useEffect, useState } from 'react';
+
+interface Recipe {
+  caloriesPerServing: number;
+  cookTimeMinutes: number;
+  cuisine: string;
+  difficulty: string;
+  id: number;
+  image: string;
+  ingredients: string[];
+  instructions: string[];
+  mealType: string[];
+  name: string;
+  prepTimeMinutes: number;
+  rating: number;
+  reviewCount: number;
+  servings: number;
+  tags: string[];
+  userId: number;
+}
 
 export default function HomePage() {
-  const recipes = [
-    {
-      id: 1,
-      name: 'Spaghetti Carbonara',
-      cuisine: 'Italian',
-      servings: 4,
-      prepTimeMinutes: 30,
-      cookTimeMinutes: 60,
-    },
-  ];
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+
+  useEffect(() => {
+    const getRecipes = async () => {
+      const response = await fetch('https://dummyjson.com/recipes');
+      const data = await response.json();
+      console.log(data.recipes);
+      if (data) {
+        setRecipes(data.recipes);
+      }
+    };
+
+    getRecipes();
+  }, []);
   const cuisines: Array<string> = [
     'All',
     'Italian',
@@ -46,7 +70,15 @@ export default function HomePage() {
                 key={`${recipe.name}-${idx}`}
                 className='flex flex-col bg-orange-50 hover:scale-105 ease-in duration-200 xl:min-h-[600px] fancyGradient'
               >
-                <CardHeader></CardHeader>
+                <CardHeader>
+                  <img
+                    src={recipe.image}
+                    alt={recipe.name}
+                    width={500}
+                    height={500}
+                    className='bg-cover rounded-md shadow-xl'
+                  />
+                </CardHeader>
                 <CardContent>
                   <CardTitle className='uppercase lg:text-3xl relative font-bold line-clamp-2'>
                     {recipe.name}
