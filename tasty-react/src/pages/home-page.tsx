@@ -66,7 +66,6 @@ export default function HomePage() {
     'Mediterranean',
     'Mexican',
     'Pakistani',
-    'naan',
   ];
   return (
     <div>
