@@ -1,10 +1,19 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Lilita_One, Montserrat } from 'next/font/google';
 import './globals.css';
 import NavBar from '@/components/ui/nav-bar';
 import RecipeProvider from '@/context/recipe-context';
 
-const inter = Inter({ subsets: ['latin'] });
+const montserratFont = Montserrat({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-montserrat',
+});
+const lilitaFont = Lilita_One({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-lilita-one',
+});
 
 export const metadata: Metadata = {
   title: 'Tasty Next App',
@@ -18,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={`${montserratFont.variable}, ${lilitaFont.variable}`}>
         <RecipeProvider>
           <>
             <NavBar />

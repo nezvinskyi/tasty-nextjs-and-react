@@ -73,6 +73,35 @@
   body {
     @apply bg-background text-foreground;
   }
+
+   h1 {
+    font-family: var(--font-lilita-one), sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  p,
+  li {
+    font-family: var(--font-montserrat), sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  h2 {
+    font-family: var(--font-montserrat), sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  h3 {
+    font-family: var(--font-montserrat), sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+  }
 }
 
 @layer utilities {
