@@ -1,4 +1,3 @@
-'use client';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -8,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 interface Recipe {
@@ -29,21 +29,14 @@ interface Recipe {
   userId: number;
 }
 
-export default function HomePage() {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+const getRecipes = async () => {
+  const response = await fetch('https://dummyjson.com/recipes');
+  const data = await response.json();
+  return data.recipes;
+};
 
-  useEffect(() => {
-    const getRecipes = async () => {
-      const response = await fetch('https://dummyjson.com/recipes');
-      const data = await response.json();
-      console.log(data.recipes);
-      if (data) {
-        setRecipes(data.recipes);
-      }
-    };
-
-    getRecipes();
-  }, []);
+export default async function HomePage() {
+  const recipes: Recipe[] = await getRecipes();
   const cuisines: Array<string> = [
     'All',
     'Italian',
@@ -72,7 +65,7 @@ export default function HomePage() {
                 className='flex flex-col bg-orange-50 hover:scale-105 ease-in duration-200 xl:min-h-[600px] fancyGradient'
               >
                 <CardHeader>
-                  <img
+                  <Image
                     src={recipe.image}
                     alt={recipe.name}
                     width={500}
